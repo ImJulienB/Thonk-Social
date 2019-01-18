@@ -132,7 +132,7 @@ session_start();
                             <form action="./php/message.php" method="post">
                                 <div class="col-sm-10">  
                                     <div class="form-group">
-                                        <textarea id="message" name="message" class="form-control" placeholder="Message" required></textarea>
+                                        <textarea id="message" name="message" class="form-control" placeholder="What's up?" required></textarea>
                                         <!-- This hidden variable allows to send your username to the PHP script -->
                                         <input type="hidden" name="username" value="<?php echo $_SESSION["user"]; ?>">
                                     </div>
@@ -272,21 +272,5 @@ session_start();
             </a>
         </div>
     </body>
-    <script>
-        $(function() {
-            $(".plusOne").click(function() {
-                $.ajax({
-                    type: "POST",
-                    url: "php/plusOne.php",
-                    data: {
-                        id: $(this).attr('data-id')
-                    },
-                    cache: false,
-                    success: function(html) {
-                        location.reload();
-                    }
-                });
-            })
-        });
-    </script>
+    <script src="js/plusone.js"></script>
 </html>

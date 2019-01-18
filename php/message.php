@@ -4,7 +4,7 @@ session_start();
 include 'database_connection.php';
 
 if(isset($_POST["message"])) {
-	$message = $_POST["message"];
+	$message = htmlspecialchars($_POST["message"]);
 	if($message != "") {
 		if(isset($_POST["username"])) {
 			$user = $_POST["username"];
@@ -30,7 +30,7 @@ if(isset($_GET['a'])) {
 }
 
 if(isset($_POST["msgedit"])) {
-	$message = $_POST["msgedit"];
+	$message = htmlspecialchars($_POST["msgedit"]);
 	if($message != "") {
 		$id = $_POST["id"];
 		$rqt = $databaseConnection->prepare("UPDATE messages SET message = :message WHERE ID = :id");
