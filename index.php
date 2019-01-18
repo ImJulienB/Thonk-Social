@@ -206,7 +206,7 @@ session_start();
                                     // The following: if the a variable does not exist in the GET method
                                 } else echo "<p>$message</p>";
                                 // Finally, showing the date in the footer of the message
-                                echo "<footer>$date, +$plusone, <a class='plusOne' data-id='$mid'>+1 this post</a></footer></blockquote>";
+                                echo "<h4><footer>+$plusone, <a class='plusOne' data-id='$mid'>+1 this post</a></footer></h4><footer>$date</footer></blockquote>";
                             }
                         ?>
                     </div>
@@ -273,18 +273,20 @@ session_start();
         </div>
     </body>
     <script>
-        $(".plusOne").click(function(e) {
-            e.preventDefault();
-            $.ajax({
-                type: "POST",
-                url: "php/plusOne.php",
-                data: {
-                    id: $(this).attr('msgid')
-                },
-                success: function() {
-                    location.reload();
-                }
-            });
+        $(function() {
+            $(".plusOne").click(function() {
+                $.ajax({
+                    type: "POST",
+                    url: "php/plusOne.php",
+                    data: {
+                        id: $(this).attr('data-id')
+                    },
+                    cache: false,
+                    success: function(html) {
+                        location.reload();
+                    }
+                });
+            })
         });
     </script>
 </html>
