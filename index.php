@@ -16,11 +16,13 @@ session_start();
 
         <!-- Theme CSS -->
         <link href="css/freelancer.css" rel="stylesheet">
+        <link href="css/style.css" rel="stylesheet">
 
         <!-- Custom Fonts -->
         <link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
         <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
         <link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/material-design-iconic-font/2.2.0/css/material-design-iconic-font.min.css">
 
         <!-- jQuery -->
         <script src="vendor/jquery/jquery.min.js"></script>
@@ -44,15 +46,6 @@ session_start();
         <?php
             include 'php/database_connection.php';
         ?>
-
-        <style>
-            /* Needed in order to display message authors correctly above the messages. */
-
-            .flex {
-                display: flex;
-                justify-content: space-between;
-            }
-        </style>
     </head>
     <body id="page-top" class="index">
 
@@ -159,12 +152,13 @@ session_start();
                         <?php
                             // SQL stuff to grab the messages and their informations
                             while ($msg = $rqt->fetch(PDO::FETCH_ASSOC)) {
-                                $id = $msg['ID'];
+                                $mid = $msg['ID'];
                                 $message = $msg['message'];
                                 $date = $msg['date'];
                                 $phpdate = strtotime( $date );
                                 $date = date('d-m-Y H:m', $phpdate );
                                 $auteur = $msg['user'];
+                                $plusone = $msg['plusone'];
                         ?>
                         <blockquote>
                             <span class='flex'>
@@ -180,7 +174,7 @@ session_start();
                                             if ($_SESSION["user"] == $auteur) {
                                                 // If yes: let's show you the edit and delete buttons
                                                 ?>
-                                                <a href='index.php?a=modif&id=<?php echo $id; ?>' class='btn btn-secondary btn-sm'>Edit</a> <a href='./php/message.php?a=sup&id=<?php echo $id; ?>' class='btn btn-danger btn-sm'>Remove</a>
+                                                <a href='index.php?a=modif&id=<?php echo $mid; ?>' class='btn btn-secondary btn-sm'>Edit</a> <a href='./php/message.php?a=sup&id=<?php echo $mid; ?>' class='btn btn-danger btn-sm'>Remove</a>
                                                 <?php
                                             }
                                         }
@@ -212,8 +206,27 @@ session_start();
                                     // The following: if the a variable does not exist in the GET method
                                 } else echo "<p>$message</p>";
                                 // Finally, showing the date in the footer of the message
-                                echo "<footer>$date</footer></blockquote>";
+                                echo "<footer>$date, +$plusone, <a class='plusOne' data-id='$mid'>+1 this post</a></footer></blockquote>";
                             }
+                        ?>
+                    </div>
+                    <div class="center-a-btn">
+                        <?php
+                        if ($page > 1) {
+                            ?><a href="?page=<?php echo $page - 1; ?>" id="nav-page" class="btn btn-primary btn-sm"><i class="zmdi zmdi-chevron-left"></i></a><?php
+                        }
+
+                        for ($i = 1; $i <= $nombreDePages; $i++) {
+                            if ($page == $i) {
+                                ?><a href="?page=<?php echo $i; ?>" id="nav-page" class="btn btn-success btn-sm"><?php echo $i; ?></a><?php
+                            } else {
+                                ?><a href="?page=<?php echo $i; ?>" id="nav-page" class="btn btn-secondary btn-sm"><?php echo $i; ?></a><?php
+                            }
+                        }
+
+                        if ($page < $nombreDePages) {
+                            ?><a href="?page=<?php echo $page + 1; ?>" id="nav-page" class="btn btn-primary btn-sm"><i class="zmdi zmdi-chevron-right"></i></a><?php
+                        }
                         ?>
                     </div>
                 </div>
@@ -259,4 +272,19 @@ session_start();
             </a>
         </div>
     </body>
+    <script>
+        $(".plusOne").click(function(e) {
+            e.preventDefault();
+            $.ajax({
+                type: "POST",
+                url: "php/plusOne.php",
+                data: {
+                    id: $(this).attr('msgid')
+                },
+                success: function() {
+                    location.reload();
+                }
+            });
+        });
+    </script>
 </html>

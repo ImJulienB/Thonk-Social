@@ -1,0 +1,17 @@
+/* Needed in order to display message authors correctly above the messages. */
+.flex {
+    display: flex;
+    justify-content: space-between;
+}
+
+a:hover {
+    cursor: pointer;
+}
+
+.center-a-btn {
+	text-align: center;
+}
+
+#nav-page {
+	font-size: 18pt;
+}
