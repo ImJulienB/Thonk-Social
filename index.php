@@ -15,7 +15,7 @@ session_start();
         <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
         <!-- Theme CSS -->
-        <link href="css/freelancer.css" rel="stylesheet">
+        <link href="css/freelancer.purified.min.css" rel="stylesheet">
         <link href="css/style.css" rel="stylesheet">
 
         <!-- Custom Fonts -->
