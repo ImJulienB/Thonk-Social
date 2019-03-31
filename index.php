@@ -108,7 +108,6 @@ session_start();
             </div>
         </header>
 
-        <!-- About Section -->
         <section>
             <div class="container">
                 <div class="row">
@@ -129,7 +128,18 @@ session_start();
                                 </div>
                                 <div class="col-sm-2">
                                     <button type="submit" class="btn btn-success btn-lg">Send</button>
-                                </div>                        
+                                </div>
+                            </form>
+
+                            <!-- Image upload form, needs to be incorporated to the messages form -->
+                            <form action="./php/image_upload.php" method="post">
+                                <div class="col-sm-10">  
+                                    <div class="form-group">
+                                        <label for="filesToUpload">Select image to upload:</label>
+                                        <input type="file" name="fileToUpload" id="fileToUpload">
+                                        <input type="submit" value="Upload Image" name="submit" class="btn btn-success btn-lg">
+                                    </div>
+                                </div>
                             </form>
                             <?php
                             }
@@ -149,6 +159,17 @@ session_start();
                                 $date = date('d-m-Y H:m', $phpdate );
                                 $auteur = $msg['user'];
                                 $plusone = $msg['plusone'];
+
+                                $message = preg_replace_callback("#(http(s|):\/\/([a-zA-Z0-9.-]{3,60})(\/|)([a-zA-Z0-9-._\/]+|))#",
+                                                                function ($matches) {
+                                                                    return "<a href='#'>{$matches[1]}</a>";
+                                                                },
+                                                                $message);
+                                $message = preg_replace_callback("#@([a-zA-Z0-9-_]{2,60})#",
+                                                                function ($matches) {
+                                                                    return "<a href='#'>{$matches[0]}</a>";
+                                                                },
+                                                                $message);
                         ?>
                         <blockquote>
                             <span class='flex'>
