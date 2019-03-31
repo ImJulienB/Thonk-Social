@@ -256,7 +256,7 @@ session_start();
                                 <br>Beverly Hills, CA 90210</p>
                         </div>
                         <div class="footer-col col-md-4">
-                            
+
                         </div>
                         <div class="footer-col col-md-4">
                             <h3>About</h3>
@@ -268,7 +268,16 @@ session_start();
             <div class="footer-below">
                 <div class="container">
                     <div class="row">
-                        <div class="col-lg-12">
+                        <div class="col-sm-12">
+                            <button class="facebook"></button>
+                            <button class="youtube"></button>
+                            <button class="twitter"></button>
+                            <button class="linkedin"></button>
+                            <button class="ripgoogleplus"></button>
+                        </div>
+                    </div>
+                    <div class="row">
+                        
                             Copyright &copy; Thonking Media 2018
                         </div>
                     </div>
