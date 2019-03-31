@@ -5,7 +5,7 @@ include "php/database_connection.php";
 <html>
 	<head>
 		<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-		<link rel="stylesheet" href="css/loginsignin.css">
+		<link rel="stylesheet" href="css/loginsignin.min.css">
 		
 	</head>
 	<body>

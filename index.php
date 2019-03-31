@@ -16,7 +16,7 @@ session_start();
 
         <!-- Theme CSS -->
         <link href="css/freelancer.purified.min.css" rel="stylesheet">
-        <link href="css/style.css" rel="stylesheet">
+        <link href="css/style.min.css" rel="stylesheet">
 
         <!-- Custom Fonts -->
         <link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
